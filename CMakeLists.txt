@@ -17,6 +17,10 @@ find_package(std_msgs REQUIRED)
 
 ament_python_install_package(${PROJECT_NAME})
 
+add_executable(cpp_publisher src/cpp_publisher.cpp)
+ament_target_dependencies(cpp_publisher rclcpp std_msgs)
+install(TARGETS cpp_publisher DESTINATION lib/${PROJECT_NAME})
+
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   # the following line skips the linter which checks for copyrights
