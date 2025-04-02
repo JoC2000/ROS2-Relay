@@ -21,7 +21,6 @@ class PublisherNode : public rclcpp::Node {
             message.data = "Hello from C++ Publisher Node!";
 
             publisher_->publish(message);
-            RCLCPP_INFO(this->get_logger(), "Published: '%s'", message.data.c_str());
         }
 
         rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
