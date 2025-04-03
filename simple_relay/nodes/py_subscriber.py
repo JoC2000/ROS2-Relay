@@ -10,18 +10,17 @@ class SubscriberNode(Node):
 
         self.subscription = self.create_subscription(
             String,
-            'topic',
+            'processed_topic',
             self.listener_callback,
             10)
         
         self.subscription
 
     def listener_callback(self, msg):
-        self.get_logger().info(f"Received message: {msg.data}")
+        self.get_logger().info(f"Received message from intermediate node: {msg.data}")
 
 def main(args=None):
     rclpy.init(args=args)
-
     node = SubscriberNode()
     rclpy.spin(node)
     rclpy.shutdown()
