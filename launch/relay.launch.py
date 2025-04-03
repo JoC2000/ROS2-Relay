@@ -14,4 +14,9 @@ def generate_launch_description():
             name="py_sub",
             output="screen",
         ),
+        Node(
+            package="simple_relay",
+            executable="intermediate_node",
+            name="intermediate",
+        )
     ])
