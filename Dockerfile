@@ -31,5 +31,8 @@ RUN rm -f /etc/ros/rosdep/sources.list.d/20-default.list && \
 WORKDIR /ros2_ws
 RUN . /opt/ros/humble/setup.sh && colcon build --symlink-install
 
-# Source the workspace
+RUN echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc && \
+    echo "source /ros2_ws/install/setup.bash" >> ~/.bashrc
+
+# Source the workspace and launch nodes
 CMD [ "bash", "-c", "source /opt/ros/humble/setup.bash && source install/setup.bash && ros2 launch simple_relay relay.launch.py" ]
