@@ -15,9 +15,14 @@ find_package(rclcpp REQUIRED)
 find_package(rclpy REQUIRED)
 find_package(std_msgs REQUIRED)
 
+# Find Python packages
 ament_python_install_package(${PROJECT_NAME})
 
+install(PROGRAMS simple_relay/nodes/py_subscriber.py DESTINATION lib/${PROJECT_NAME})
+
+# Install CPP files and modules
 add_executable(cpp_publisher src/cpp_publisher.cpp)
+
 ament_target_dependencies(
   cpp_publisher 
   rclcpp 
@@ -26,8 +31,17 @@ ament_target_dependencies(
 
 install(TARGETS cpp_publisher DESTINATION lib/${PROJECT_NAME})
 
-install(PROGRAMS simple_relay/nodes/py_subscriber.py DESTINATION lib/${PROJECT_NAME})
+add_executable(intermediate_node src/intermediate.cpp)
 
+ament_target_dependencies(
+  intermediate_node
+  rclcpp
+  std_msgs
+)
+
+install(TARGETS intermediate_node DESTINATION lib/${PROJECT_NAME})
+
+# Install launch files
 install(DIRECTORY launch DESTINATION share/${PROJECT_NAME})
 
 if(BUILD_TESTING)
